@@ -1,8 +1,8 @@
-import toast, { Toaster } from 'react-hot-toast';
+// import toast, { Toaster } from 'react-hot-toast';
 export default function SearchBar({ onSubmit }) {
 
-  const notify = () => toast.error("Oops. You forgot to fill in the inbox");
-  
+  // const notify = () => toast.error("Oops. You forgot to fill in the inbox");
+
 	const handleSubmit = (evt, ) => {
         evt.preventDefault();
         
@@ -11,7 +11,7 @@ export default function SearchBar({ onSubmit }) {
         console.log(input);
         
     if (form.elements.input.value.trim() === "") {
-      notify();    
+      // notify();    
 			return;
 		}
     onSubmit(input);
@@ -19,7 +19,6 @@ export default function SearchBar({ onSubmit }) {
   };
 
   
-
   return (
   <>
       <header>
@@ -27,11 +26,13 @@ export default function SearchBar({ onSubmit }) {
             <input type="text"
                 name="input"
                 placeholder="Search images and photos" />
-      <button onClick={notify} type="submit">Search</button>
+      <button  type="submit">Search</button>
       </form>   
     </header>
-    <Toaster/>
+    {/* <Toaster/> */}
   </>
     
   );
 }
+
+// onClick={notify}

@@ -12,7 +12,6 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-
  
   useEffect(() => {
     if (searchQuery.trim() === "") {
@@ -23,9 +22,8 @@ export default function App() {
       try {
         setLoading(true);
         setError(false);
-        const data = getImg(searchQuery, page);
-        setImages([data]);
-        console.log(data);
+        const data = await getImg(searchQuery, page);
+        setImages(data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -50,7 +48,8 @@ export default function App() {
     return (
       <>
         <SearchBar onSubmit={handleSearch} />
-        {images.length > 0 && <ImageGallery items={images} />}
+        {/* {images.length > 0 && <ImageGallery items={images} />} */}
+        <ImageGallery items={images} />
 
 
         {loading && <p>Loading...</p>}
