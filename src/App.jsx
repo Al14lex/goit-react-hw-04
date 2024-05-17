@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
-// import axios from "axios";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import { getImg } from "./images-api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn"
+import Loader from "./components/Loader/Loader";
+import ImageModal from "./components/ImageModal/ImageModal";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 
 export default function App() {
@@ -12,6 +16,7 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+   const [selectedImage, setSelectedImage] = useState(null); 
  
   useEffect(() => {
     if (searchQuery.trim() === "") {
@@ -23,7 +28,7 @@ export default function App() {
         setLoading(true);
         setError(false);
         const data = await getImg(searchQuery, page);
-        setImages(data);
+         setImages(prevImages => [...prevImages, ...data]);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -45,17 +50,33 @@ export default function App() {
     setPage(page + 1);
   };
 
+  const handleImageClick = (imageUrl) => {
+    setSelectedImage(imageUrl); 
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  }
     return (
       <>
         <SearchBar onSubmit={handleSearch} />
-        {/* {images.length > 0 && <ImageGallery items={images} />} */}
-        <ImageGallery items={images} />
+        {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
 
-
-        {loading && <p>Loading...</p>}
+        <Loader loading={loading} />
         {error && <p>Error: {error}</p>}
 
-        {images.length > 0 && !loading && <LoadMoreBtn click={handleLoadMore}/>}
+        {images.length > 0 && !loading &&
+        <LoadMoreBtn onClick={handleLoadMore} />}
+
+         {selectedImage && (
+        <ImageModal
+          isOpen={true}
+          onClose={handleCloseModal}
+          imageUrl={selectedImage}
+        />
+      )}
       </>
     );
   }
+
+  

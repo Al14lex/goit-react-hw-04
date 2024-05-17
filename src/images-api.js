@@ -6,10 +6,10 @@ const ACCESS_KEY = "LU4Qy42qH-ebJfYpJP6dHBw-WuSVgoN9MOiNBziUaA0";
 export const getImg = async (input, currentPage) => {
       const response = await axios.get("/search/photos", {
         params:{
-           query: input,
-           page: currentPage,
-           per_page: 9,
-           client_id: ACCESS_KEY
+          query: input,
+          page: currentPage,
+          per_page: 9,
+          client_id: ACCESS_KEY
         }
       });
     console.log(response.data.results);

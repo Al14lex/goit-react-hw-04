@@ -1,10 +1,10 @@
 
-// const ImageCard = ({ imageUrl, alt }) => {
-//   return (
-//     <div>
-//       <img src={imageUrl} alt={alt} />
-//     </div>
-//   );
-// };
+const ImageCard = ({ url, alt }) => {
+  return (
+    <div>
+      <img src={url} alt={alt} />
+    </div>
+  );
+};
 
-// export default ImageCard;
+export default ImageCard;
