@@ -8,11 +8,14 @@ const customStyles = {
   content: {
     top: '50%',
     left: '50%',
-    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    maxWidth: '70%', 
-    height: '70%', 
+    maxWidth: '40%', 
+    height: '80%', 
     overflow: 'hidden' 
+    },
+  image: {
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
 };
 
